@@ -46,7 +46,8 @@ struct Symbol
 	Symbol_Array * Symbol_array;//标识符表示的种类为数组
 	Symbol_Function * Symbol_function;//标识符表示的种类为函数
 	Symbol_Struct * Symbol_struct;//标识符表示的种类为结构体
-	SymbolTable_Node * Link;//相同作用域的标识符
+	SymbolTable_Node * Front;//相同作用域的标识符，前一个连接的标识符
+	SymbolTable_Node * Link;//相同作用域的标识符,下一个连接的标识符
 };
 //符号表树结构
 struct SymbolTable_Node

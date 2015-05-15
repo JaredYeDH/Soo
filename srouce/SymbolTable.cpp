@@ -4,7 +4,7 @@ using namespace std;
 //符号表的树结构根节点
 void Symbol_System::Symbol_CreateTree()
 {
-
+	this->SymbolTreeRoot = new SymbolTable_Node;
 	this->SymbolTreeRoot->SymbolData.Name = "SymbolSystem_Root";
 	this->SymbolTreeRoot->Child = new SymbolTable_Node;
 	this->SymbolTreeRoot->Child = NULL;
@@ -24,6 +24,8 @@ void Symbol_System::Symbol_Add(Symbol symboldata,External state)
 			symbolnode.SymbolData.Type = symboldata.Type;
 			symbolnode.SymbolData.DType = symboldata.DType;
 			symbolnode.Root = this->SymbolPointer->Root;
+			symbolnode.SymbolData.Link = NULL;
+			symbolnode.SymbolData.Front = this->SymbolTreeRoot;
 			symbolnode.Child = NULL;
 			this->SymbolPointer = &symbolnode;
 		}
@@ -35,6 +37,8 @@ void Symbol_System::Symbol_Add(Symbol symboldata,External state)
 			symbolnode.SymbolData.DType = symboldata.DType;
 			symbolnode.Root = this->SymbolPointer->Root;
 			symbolnode.Child = NULL;
+			symbolnode.SymbolData.Link = NULL;
+			symbolnode.SymbolData.Front = this->SymbolPointer;
 			this->SymbolPointer->SymbolData.Link = new SymbolTable_Node;
 			this->SymbolPointer->SymbolData.Link = &symbolnode;
 		}
@@ -48,6 +52,8 @@ void Symbol_System::Symbol_Add(Symbol symboldata,External state)
 			symbolnode.SymbolData.Type = symboldata.Type;
 			symbolnode.SymbolData.DType = symboldata.DType;
 			symbolnode.Root = this->SymbolPointer;
+			symbolnode.SymbolData.Link = NULL;
+			symbolnode.SymbolData.Front = this->SymbolPointer;
 			this->SymbolPointer->Child = new SymbolTable_Node;
 			this->SymbolPointer->Child = &symbolnode;
 		}
@@ -57,6 +63,8 @@ void Symbol_System::Symbol_Add(Symbol symboldata,External state)
 			symbolnode.SymbolData.Name = symboldata.Name;
 			symbolnode.SymbolData.Type = symboldata.Type;
 			symbolnode.SymbolData.DType = symboldata.DType;
+			symbolnode.SymbolData.Link = NULL;
+			symbolnode.SymbolData.Front = this->SymbolPointer;
 			symbolnode.Root = this->SymbolPointer;
 			this->SymbolPointer->Child->SymbolData.Link = new SymbolTable_Node;
 			this->SymbolPointer->Child->SymbolData.Link = &symbolnode;
@@ -67,7 +75,11 @@ void Symbol_System::Symbol_Add(Symbol symboldata,External state)
 //将符号从树形结构符号表系统删除
 void Symbol_System::Symbol_Delete(string symbolname, TypeCode type, Data_Type dtype)
 {
-
+	SymbolTable_Node *Delete = Symbol_Search(symbolname, type, dtype);
+	SymbolTable_Node * DeleteFront = Delete->SymbolData.Front; //需要删除的节点的前缀节点
+	SymbolTable_Node * DeleteLink = Delete->SymbolData.Link;//需要删除的节点的连接节点
+	DeleteFront->SymbolData.Link = DeleteLink;
+	delete Delete;
 }
 
 //符号表中的标识符查找
