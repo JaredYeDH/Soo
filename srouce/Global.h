@@ -49,4 +49,17 @@ enum TypeCode
 	T_String=7,//字符串
 	T_Array=8,//数组
 };
+enum Register
+{
+	REG_EAX=0,
+	REG_ECX,
+	REG_EDX,
+	REG_EBX,
+	REG_ESP,
+	REG_EBP,
+	REG_ESI,
+	REG_EDI,
+	REG_ANY
+};
+#define REG_IRET REG_EAX //指定EAX为存放返回值的寄存器
 #endif
