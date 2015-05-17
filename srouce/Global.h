@@ -49,6 +49,7 @@ enum TypeCode
 	T_String=7,//字符串
 	T_Array=8,//数组
 };
+//寄存器编码
 enum Register
 {
 	REG_EAX=0,
@@ -62,4 +63,10 @@ enum Register
 	REG_ANY
 };
 #define REG_IRET REG_EAX //指定EAX为存放返回值的寄存器
+//寻址方式
+enum AddressForm
+{
+	ADDR_OTHER,//寄存器间接寻址
+	ADDR_REG=3,//寄存器直接寻址
+};
 #endif
