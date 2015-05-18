@@ -4,6 +4,7 @@
 #pragma once
 #ifndef _X86_H
 #define _X86_H
+#include <stack>
 #include "Global.h"
 #include "SymbolTable.h"
 //操作树存储结构
@@ -18,6 +19,7 @@ struct Operand
 class CodeGenerate
 {
 public:
+	stack<Operand> OperandStack;//操作数栈
 	//生成通用指令
 	void GenerateByte(char c);//向代码节写入一个字节
 	void GeneratePrefix(char opcode);//生成指令前缀
