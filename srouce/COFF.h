@@ -73,11 +73,14 @@ struct Section
 class COFF_FileSystem
 {
 public:
+	static COFF_FileSystem & COFF_FileSystemInstance();
 	/*
 		数据成员
 	*/
 	vector<Section> Sections;//节的动态数组
 	int Nesc_Image;//映像文件个数
+	Section * Section_text;//代码节
+	Section * Section_data;//数据节
 	/*
 		成员函数
 	*/
@@ -95,4 +98,9 @@ public:
 	void FreeSections();//释放所有节的数据
 	void Output_Obj();//输出目标文件
 };
+COFF_FileSystem & COFF_FileSystem::COFF_FileSystemInstance()
+{
+	COFF_FileSystem  coff;
+	return coff;
+}
 #endif
