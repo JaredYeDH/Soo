@@ -42,3 +42,60 @@ void CodeGenerate::GenerateModrm(int mod, int sourceOp, int destinationOp, Symbo
 {
 
 }
+//生成4字节操作数，c：4字节操作数
+void CodeGenerate::GenerateDword(unsigned int c)
+{
+	GenerateByte(c);
+	GenerateByte(c >> 8);
+	GenerateByte(c >> 16);
+	GenerateByte(c >> 24);
+}
+//生成全局符号地址
+void CodeGenerate::GenerateAdd32(int Register, Symbol *symbol, int correlationvalue)
+{
+	GenerateDword(correlationvalue);
+}
+//将操作数operand加载到寄存器Register中
+void CodeGenerate::GenerateLoad(int correlationvalue, Operand * operand)
+{
+	int Register, Value, V;
+	Data_Type Type;
+	Register = operand->Register;
+	Value = operand->value;
+	Type = operand->type;
+	V = Register&Soo_Valmask;
+	if (Register&Soo_Lval) //是左值
+	{
+		if ((Type&T_Btype) == T_Char)
+			GenerateOpcode2(0x0f, 0xbe);
+		else if ((Type&T_Btype) == T_Short)
+			GenerateOpcode2(0x0f, 0xbf);
+		else
+			GenerateOpcode1(0x8b);
+	}
+	else
+	{
+		if (V == Soo_Global)
+		{
+			GenerateOpcode1(0xb8 + correlationvalue);
+			GenerateAdd32(Register, operand->symbol, Value);
+		}
+		else if (V == Soo_Local)
+		{
+			GenerateOpcode1(0x8d);
+		}
+	}
+}
+//将寄存器Register中的值存入操作数operand中
+void CodeGenerate::GenerateStore(int Register, Operand *operand)
+{
+	int Register, ByteType;
+	Register = operand->Register&Soo_Valmask;
+	ByteType = operand->type&T_Btype;
+	if (ByteType == T_Short)
+		GeneratePrefix(0x66);
+	if (ByteType == T_Char)
+		GenerateOpcode1(0x88);
+	else
+		GenerateOpcode1(0x89);
+}

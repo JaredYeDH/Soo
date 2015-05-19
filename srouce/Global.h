@@ -41,13 +41,14 @@ enum TypeCode
 {
 	T_Int=0, //整型
 	T_Char=1,//字符型
-	T_Float=2,//浮点型
+	T_Short=2,//短整型
 	T_Void=3,//空类型
 	T_Ptr=4,//指针
 	T_Func=5,//函数
 	T_Struct=6,//结构体
 	T_String=7,//字符串
 	T_Array=8,//数组
+	T_Btype=0x000f,//基本类型掩码
 };
 //寄存器编码
 enum Register
@@ -68,5 +69,13 @@ enum AddressForm
 {
 	ADDR_OTHER,//寄存器间接寻址
 	ADDR_REG=3,//寄存器直接寻址
+};
+//存储类型
+enum StorageType
+{
+	Soo_Global=0x00f0,//包括整型常量，字符常量，字符串常量，全局变量，函数定义
+	Soo_Local=0x00f1,	//栈中变量
+	Soo_Valmask=0x00ff,	//存储类型掩码
+	Soo_Lval=0x0100,	//左值
 };
 #endif

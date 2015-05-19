@@ -58,3 +58,17 @@ void COFF_FileSystem::Section_Realloc(Section *section, int new_size)
 	section->data = data;
 	section->data_allocated = size;
 }
+//分配存储空间
+/*
+	type：变量类型
+	storagetype:变量存储类型
+	has_init:是否进行初始化
+	number:变量符号编号
+	address:变量存储地址
+	返回值：变量存储值
+*/
+Section *Allocate_Storage(Data_Type *type, int storagetype, int has_init, int number, int *address)
+{
+	int size, align;
+	Section* section = NULL;
+}

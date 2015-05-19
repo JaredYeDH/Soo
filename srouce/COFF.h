@@ -85,6 +85,7 @@ public:
 		成员函数
 	*/
 	Section *Section_New(char *name, int characteristics);//新建节
+	Section *Allocate_Storage(Data_Type *type, int Register, int has_init, int number, int *address);//分配存储空间
 	void *Section_AddSize(Section *section, int increment);//给节数据预留空间
 	void Section_Realloc(Section *section, int new_size);//给节数据重新分配内存，并将内容初始化为0
 	Section * New_CoffSymSection(char * symtablename, int charaacteristics, char * strtabname);//新建存储COFF符号表的节
