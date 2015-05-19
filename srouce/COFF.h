@@ -35,9 +35,11 @@ struct Image_SectionHead
 	}Misc;
 	DWORD VirtualAddress;
 	DWORD SizeOfRawData;
-	DWORD PointerToRelocation;
-	WORD PonterToLinenumbers;
+	DWORD PointerToRawData;
+	DWORD PointerToRelocations;
+	DWORD PonterToLinenumbers;
 	WORD NumberOfRelocations;
+	DWORD NumberOfLinenumbers;
 	DWORD Characteristics;
 };
 //COFF符号表
@@ -59,7 +61,7 @@ struct CoffReloc
 	BYTE section;
 	BYTE type;
 };
-//COFF目标文件节结构定义
+//COFF目标文件 节结构定义
 struct Section
 {
 	int data_offset;//当前数据偏移位置
@@ -81,6 +83,11 @@ public:
 	int Nesc_Image;//映像文件个数
 	Section * Section_text;//代码节
 	Section * Section_data;//数据节
+	Section * Section_rdata;//只读数据节
+	Section * Section_bss;//未初始化数据节
+	Section * Section_rel;//重定位信息节
+	Section * Section_symtable;//符号表节
+	Section * Section_idata;//导入表节
 	/*
 		成员函数
 	*/
@@ -97,7 +104,8 @@ public:
 	void CoffReloc_DirectAdd();//增加重定位信息
 	void CoffInit();//COFF初始化
 	void FreeSections();//释放所有节的数据
-	void Output_Obj();//输出目标文件
+	void Output_Obj(char *name);//输出目标文件
+	void Fpad(FILE * file, int new_pos);//从当前读写位置到new_pos位置用0填补文件内容
 };
 COFF_FileSystem & COFF_FileSystem::COFF_FileSystemInstance()
 {
