@@ -11,6 +11,7 @@ enum Data_Type
 	String,
 	Void,
 	Struct,
+	Array,
 };
 //º¯Êı½âÎö×´Ì¬
 enum External

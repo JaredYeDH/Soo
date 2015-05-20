@@ -147,4 +147,5 @@ Section *Allocate_Storage(Data_Type *type, int storagetype, int has_init, int nu
 {
 	int size, align;
 	Section* section = NULL;
+	size=
 }

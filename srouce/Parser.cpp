@@ -13,6 +13,17 @@ void Parser::Parsering(queue<Token> Queue)
 	{
 		External_Dec(Global);
 	}
+}//返回类型长度
+int Type_Size(Data_Type *type)
+{
+	switch (*type)
+	{
+	case Int:
+		return 4;
+	default: //char,void ,function
+		return  1;
+		break;
+	}
 }
 //Token 是否合法的预判
 void Parser::Token_Judge(string token, string module, string function, string error)

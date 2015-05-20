@@ -7,14 +7,23 @@
 #include "Global.h"
 #include "SymbolTable.h"
 using namespace std;
+
+//通用变量类型结构
+struct VariableType
+{
+	Data_Type type;	//数据类型
+	Symbol * symbol;//引用的符号表示
+};
 /*
-		语法分析
+	语法分析
 */
 class Parser
 {
 public:
+
 	static Parser & Parser_Instance();	//语法分析实例化
 	void Parsering(queue<Token> Queue);	//进行语法分析
+	void Type_Size(Data_Type type);		//返回类型长度
 	void External_Dec(External state);  //解析外部声明
 	bool Type_Sign(Symbol & symboldata);//判断是否为类型符号
 	void Declarator(Symbol & symboldata);//声明符
