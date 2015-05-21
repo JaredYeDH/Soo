@@ -12,6 +12,8 @@ using namespace std;
 	符号表系统
 	在编译程序中符号表用来存放程序中出现的有关标识符的属性信息
 */
+struct Symbol;
+struct SymbolTable_Node;
 //数组数据类型
 struct Symbol_Array
 {
@@ -35,7 +37,6 @@ struct Symbol_Function
 	int Func_Address;//函数入口地址
 	vector<Symbol_FuncParam> Func_ParamList;//函数的形式参数
 };
-
 //标识符节点结构
 struct Symbol
 {
@@ -72,7 +73,7 @@ public:
 //符号系统的实例化
 Symbol_System & Symbol_System::Symbol_SystemInstance()
 {
-	Symbol_System symbol;
+	static Symbol_System symbol;
 	return symbol;
 }
 

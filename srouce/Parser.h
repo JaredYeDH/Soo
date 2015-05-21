@@ -61,7 +61,7 @@ public:
 };
 inline Parser & Parser::Parser_Instance()
 {
-	Parser parser;
+	static Parser parser;
 	return parser;
 }
 #endif

@@ -32,7 +32,7 @@ void Parser::Token_Judge(string token, string module, string function, string er
 		Lexer::Lexer_Instance().Lexer_Read();
 	else
 	{
-		Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber,module, function, error);
+		Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber(),module, function, error);
 		error.ThrowError();
 	}
 }
@@ -93,7 +93,7 @@ void Parser::External_Dec(External state)
 	Symbol symboldata;
 	if (!Type_Sign(symboldata)) //类型判断
 	{
-		Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber, "Type", "declaration", "no such type");
+		Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber(), "Type", "declaration", "no such type");
 		error.ThrowError();
 	}
 	if (symboldata.DType == T_Struct)
@@ -111,7 +111,7 @@ void Parser::External_Dec(External state)
 		{
 			if (state == Local) //函数嵌套函数，即非法
 			{
-				Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber, "Dec", "declaration", "not support function nest");
+				Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber(), "Dec", "declaration", "not support function nest");
 				error.ThrowError();
 			}
 			Funbody();//函数体
@@ -163,7 +163,7 @@ void Parser::Struct_Specifier(Symbol & symboldata)
 	Token token = Lexer::Lexer_Instance().Lexer_Read();// 读取结构体名字
 	if (!Declaration_Legal(token)) //结构体名字合法性判断
 	{
-		Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber, "Struct", "Struct  declaration", "Struct name is not legal");
+		Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber(), "Struct", "Struct  declaration", "Struct name is not legal");
 		error.ThrowError();
 	}
 	symboldata.Name = token.Token_GetText(); //获取结构体名字
@@ -214,18 +214,18 @@ void Parser::Init()
 void Parser::Declarator(Symbol & symboldata)
 {
 	Token token;
-	if (Lexer::Lexer_Instance().Lexer_Peek(0).Token_IsId)
+	if (Lexer::Lexer_Instance().Lexer_Peek(0).Token_IsId())
 	{
 		token=Lexer::Lexer_Instance().Lexer_Read(); //读取这个标识符
 	}
 	else
 	{
-		Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber, "Ident", "declaration", "need input a ID");
+		Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber(), "Ident", "declaration", "need input a ID");
 		error.ThrowError();
 	}
 	if (!Declaration_Legal(token)) //名字合法性判断
 	{
-		Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber, "Declarator", "  declaration", "Declarator name is not legal");
+		Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber(), "Declarator", "  declaration", "Declarator name is not legal");
 		error.ThrowError();
 	}
 	symboldata.Name = token.Token_GetText();//符号表获取标识符
@@ -263,7 +263,7 @@ void Parser::Func_ParameterList(Symbol_Function &symbol_funciton)
 		Symbol Func_Parameter;//函数参数
 		if (!Type_Sign(Func_Parameter))
 		{
-			Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber, "Ident", "declaration", "no such type");
+			Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber(), "Ident", "declaration", "no such type");
 			error.ThrowError();
 		}
 		Declarator(Func_Parameter); //确定 标识符
@@ -271,13 +271,13 @@ void Parser::Func_ParameterList(Symbol_Function &symbol_funciton)
 		symbol_funcparam.name = Func_Parameter.Name;
 		symbol_funcparam.type = Func_Parameter.DType;
 		symbol_funciton.Func_ParamList.push_back(symbol_funcparam);
-		if (Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetText == ",")
+		if (Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetText()== ",")
 		{
 			Lexer::Lexer_Instance().Lexer_Read();//读取”=“
 			continue;
 		}
 	}
-	if (Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetText == ")")
+	if (Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetText() == ")")
 		Lexer::Lexer_Instance().Lexer_Read();
 }
 //函数体
@@ -297,7 +297,7 @@ void Parser::Compound_Statement()
 	{
 		Statement();//语句
 	}
-	if (Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetText == "}")
+	if (Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetText() == "}")
 		Lexer::Lexer_Instance().Lexer_Read();
 }
 //语句
@@ -495,7 +495,7 @@ void Parser::Variable_Expression()
 		break;
 	default:
 	{
-			   Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber, "Variable", "Variable_Expression", "no such type variable");
+			   Error error(Lexer::Lexer_Instance().Lexer_Peek(0).Token_GetLinenumber(), "Variable", "Variable_Expression", "no such type variable");
 			   error.ThrowError();
 			   break;
 	}

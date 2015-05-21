@@ -109,7 +109,7 @@ public:
 };
 COFF_FileSystem & COFF_FileSystem::COFF_FileSystemInstance()
 {
-	COFF_FileSystem  coff;
+	static COFF_FileSystem  coff;
 	return coff;
 }
 #endif

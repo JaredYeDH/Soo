@@ -31,7 +31,7 @@ public:
 };
 inline API &API::Instance()
 {
-	API API_Instance;
+	static API API_Instance;
 	return API_Instance;
 }
 #endif

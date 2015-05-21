@@ -40,6 +40,8 @@ Token StopEOF(-1);
 class Lexer
 {
 public:
+	string::const_iterator start, end;
+	int pos;
 	static Lexer & Lexer_Instance(); //实例化词法分析
 	queue<Token> Queue; //词法分析的结果
 	bool HasMore;
@@ -51,7 +53,7 @@ public:
 };
 inline Lexer & Lexer_Instance()
 {
-	Lexer Lexer_out;
+	static Lexer Lexer_out;
 	return Lexer_out;
 }
 #endif

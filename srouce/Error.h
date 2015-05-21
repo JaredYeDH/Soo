@@ -18,7 +18,7 @@ public:
 };
 inline Error & Error_Instance()
 {
-	Error error;
+	static Error error;
 	return error;
 }
 #endif

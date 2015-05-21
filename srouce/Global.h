@@ -42,7 +42,7 @@ enum TypeCode
 {
 	T_Int=0, //整型
 	T_Char=1,//字符型
-	T_Short=2,//短整型
+	T_Float=2,//短整型
 	T_Void=3,//空类型
 	T_Ptr=4,//指针
 	T_Func=5,//函数

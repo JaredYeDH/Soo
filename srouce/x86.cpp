@@ -6,7 +6,7 @@ using namespace std;
 */
 int Rsym; //记录return 位置
 int Ind = 0;//指令在代码节的位置
-int Local;//局部变量在栈中的位置
+int local;//局部变量在栈中的位置
 int Func_Begin;//函数开始指令
 int Func_Ret;//函数返回 释放栈空间大小
 Symbol * SymbolData;//只读节符号
@@ -89,8 +89,8 @@ void CodeGenerate::GenerateLoad(int correlationvalue, Operand * operand)
 //将寄存器Register中的值存入操作数operand中
 void CodeGenerate::GenerateStore(int Register, Operand *operand)
 {
-	int Register, ByteType;
-	Register = operand->Register&Soo_Valmask;
+	int RegisterType, ByteType;
+	RegisterType= operand->Register&Soo_Valmask;
 	ByteType = operand->type&T_Btype;
 	if (ByteType == T_Short)
 		GeneratePrefix(0x66);

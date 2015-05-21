@@ -36,6 +36,7 @@ string API::Int2String(int number)
 float API::String2Float(string str)
 {
 	float number = atof(str.c_str());
+	return number;
 }
 //stringn ×ªchar *
 char* API::String2CharPlus(string str)
@@ -83,6 +84,10 @@ Operator API::Token2Operator(Token token)
 		return Plus;
 	if (token.Token_GetText() == "-")
 		return Minus;
+	else
+	{
+		Error
+	}
 }
 //»¶Ó­½çÃæ
 void API::API_Welcome()
