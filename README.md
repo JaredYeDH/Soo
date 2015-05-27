@@ -12,7 +12,7 @@
 <h5>Configure boost:
 
         在词法分析Lexer.h 中使用了boost::regex类 ，所以需要配置boost库。
-<h5>模块功能：
+<h5>Module：
 
         API:    串联各个模块
         Lexer:  词法分析
