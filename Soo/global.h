@@ -14,16 +14,36 @@
 #include <vector>
 using namespace std;
 
-struct symbol
+extern string node;
+extern int nodenum;
+
+enum var_type
 {
-    string symbolname;
-	int value;
+    int_variable,
+	int_array
 };
+
+enum exp_type
+{
+	if_exp,
+	while_exp,
+};
+class symbol
+{
+public:
+	string symbolname;
+	int int_value;
+	vector<int> array_value;
+	bool isarray;
+	var_type type;
+};
+
 
 extern vector<string> codestream;
 extern vector<symbol> symboltable;
 
-void symbol_insert(string name,int vlaue);
+void symbol_insert_intvalue(string name,int vlaue);
+void symbol_insert_intarray(string name, vector<int> &values);
 bool symbol_search(string name);
 int symbol_getvalue(string name);
 void error(string error);
