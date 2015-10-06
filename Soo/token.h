@@ -18,9 +18,9 @@ class token
 {
 public:
     char * string2char(string str);
-	static string infile;
-	static string outfile;
-	bool tokeninit();
-	void readline();
+    static string infile;
+    static string outfile;
+    bool tokeninit();
+    void readline();
 };
 #endif /* defined(__Soo__token__) */
