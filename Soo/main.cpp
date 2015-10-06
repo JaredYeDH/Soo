@@ -13,9 +13,9 @@ using namespace std;
 
 int main() {
     token tokenmachine;
-//	tokenmachine.tokeninit();
-	tokenmachine.readline();
-	parse parsemachine;
-	parsemachine.build_ast();
-	return 0;
+  //tokenmachine.tokeninit();
+    tokenmachine.readline();
+    parse parsemachine;
+    parsemachine.build_ast();
+    return 0;
 }
