@@ -13,101 +13,106 @@
 #include "token.h"
 using namespace std;
 
-char * string2char(string str)
-{
-    return const_cast<char *>(str.c_str());
-}
-
-string getsign(string choice)
-{
-	if (choice == "now")
-	{
-		stringstream s;
-		string str;
-		s << nodenum;
-		s >> str;
-		string sign = node + str;
-		return sign;
-	}
-	else if (choice == "next")
-	{
-		nodenum++;
-		stringstream s;
-		string str;
-		s << nodenum;
-		s >> str;
-		string sign = node + str;
-		return sign;
-	}
-}
-
 void immediate_ast::codegen()
 {
-	cout << " " << number << endl;
+    cout << " " << number << endl;
 }
 
 void number_ast::codegen()
 {
-	//ofstream fout(string2char(token::outfile));
-	//fout << "OPLOAD AL " << number << endl;
-	cout << "OPLOAD AL " << number << endl;
+    //ofstream fout(string2char(token::outfile));
+    //fout << "OPLOAD AL " << number << endl;
+    cout << "OPLOAD AL " << number << endl;
 }
 
-void array_ast::codegen()
+void string_ast::codegen()
 {
-	cout << "OPINITLIST " << name<<" ";
-	for (int size = 0; size < values.size(); size++)
-		cout << values[size] << " ";
-	cout << end << endl;
+    cout<<"OPLOAD DL "<<"\""<<str<<"\""<<endl;
+}
+
+
+void strarray_ast::codegen()
+{
+    cout<<"OPINITLIST "<<name<<" ";
+    for (int size=0; size<values.size(); size++)
+        cout<<"\""<<values[size]<<"\""<<" ";
+    cout<<end<<endl;
+}
+
+void intarray_ast::codegen()
+{
+    cout << "OPINITLIST " << name<<" ";
+    for (int size = 0; size < values.size(); size++)
+        cout << values[size] << " ";
+    cout << end << endl;
 }
 
 void defvariable_ast::codegen()
 {
-	//ofstream fout(string2char(token::outfile));
-	variable_value->codegen();
-	//fout << "OPINIT " << variable_name << " AL" << endl;
-	cout << "OPINIT " << variable_name << " AL" << endl;
+    //ofstream fout(string2char(token::outfile));
+    int_value->codegen();
+    //fout << "OPINIT " << variable_name << " AL" << endl;
+    cout << "OPINIT " << int_name << " AL" << endl;
 }
 
+void defstrvariable_ast::codegen()
+{
+    str_value->codegen();
+    cout<<"OPINIT "<<str_name<<" DL"<<endl;
+}
+void assign_ast::codegen()
+{
+    cout<<"OPASSIGN "<<variable_name<<" "<<value_name<<endl;
+}
+void binary_ast::codegen()
+{
+    if (op=="+")
+        cout<<"OPBINADD "+save+" "+left+" "+right<<endl;
+    else if(op=="-")
+        cout<<"OPBINSUB "+save+" "+left+" "+right<<endl;
+    else if(op=="*")
+        cout<<"OPBINMUL "+save+" "+left+" "+right<<endl;
+    else if(op=="/")
+        cout<<"OPBINDIV "+save+" "+left+" "+right<<endl;
+}
 void judge_ast::codegen()
 {
-	string sign = getsign(choice);
-	if (op == "<")
-		cout << "JG " << left->number << " " << right->number << " " << sign << endl;
-}
-
-void while_ast::codegen()
-{
-	string sign = getsign("next");
-	if (op == "<")
-		cout << "JG " << left->number << " " << right->number << " " << sign << endl;
+    if (op == "<")
+        cout << "JG " << left->idname << " " << right->idname << " " << sign << endl;
+    else if(op==">")
+        cout<<"JNG "<<left->idname<<" "<<right->idname<<" "<<sign<<endl;
 }
 
 void callfunc_ast::codegen()
 {
-	//ofstream fout(string2char(token::outfile));
-	//fout << "JMP " <<func_name<< endl;
-	cout << "JMP " << func_name << endl;
+    //ofstream fout(string2char(token::outfile));
+    //fout << "JMP " <<func_name<< endl;
+    cout << "JMP " << func_name << endl;
 }
 
 void function_ast::codegen()
 {
-	//ofstream fout(string2char(token::outfile));
-	//fout << func_name << " :" << endl;
-	cout << func_name << " :" << endl;
+    //ofstream fout(string2char(token::outfile));
+    //fout << func_name << " :" << endl;
+    cout << func_name << " :" << endl;
 }
 
 void sign_ast::get_sign()
 {
-	this->sign = getsign(this->choice);
+    this->sign = getsign(this->choice);
 }
 
 void sign_ast::codegen()
 {
-	cout <<this->sign<< " :" << endl;
+    cout <<this->sign<< " :" << endl;
 }
 
 void end_ast::codegen()
 {
-	cout << end << endl;
+    cout << end <<" "<<sign<<endl;
+}
+
+void print_ast::codegen()
+{
+    
 }
