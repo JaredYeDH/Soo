@@ -8,6 +8,7 @@
 
 #include "global.h"
 #include <string>
+#include <sstream>
 #include <vector>
 #include <string>
 using namespace std;
@@ -19,43 +20,91 @@ vector<symbol> symboltable;
 
 bool symbol_search(string name)
 {
-    for (int index = 0; index < symboltable.size(); index++)
-	{
-		if (name == symboltable[index].symbolname)
-			return true;
-	}
-	return false;
+    for (int symbol_index = 0; symbol_index < symboltable.size(); symbol_index++)
+    {
+        if (name == symboltable[symbol_index].symbolname)
+            return true;
+    }
+    return false;
 }
 
-void symbol_insert_intvalue(string name, int value)
+void symbol_insert(string name, var_type type)
 {
-	symbol newsymbol;
-	newsymbol.symbolname = name;
-	newsymbol.int_value = value;
-	newsymbol.isarray = false;
-	symboltable.push_back(newsymbol);
-
+    symbol newsymbol;
+    newsymbol.symbolname=name;
+    newsymbol.type=type;
+    symboltable.push_back(newsymbol);
 }
 
-void symbol_insert_intarray(string name, vector<int> &values)
+var_type symbol_gettype(string name)
 {
-	symbol newsymbol;
-	newsymbol.symbolname = name;
-	newsymbol.array_value = values;
-	newsymbol.isarray = true;
-	symboltable.push_back(newsymbol);
+    symbol get;
+    for (int symbol_index=0; symbol_index<symboltable.size(); symbol_index++) {
+        if(name==symboltable[symbol_index].symbolname)
+            get=symboltable[symbol_index];
+    }
+    return get.type;
 }
 
-int symbol_getvalue(string name)
+symbol symbol_getsymbol(string name)
 {
-	for (int index = 0; index < symboltable.size(); index++)
-	{
-		if (name == symboltable[index].symbolname)
-			return symboltable[index].int_value;
-	}
+    symbol nullsymbol;
+    for(int symbol_index;symbol_index<symboltable.size();symbol_index++)
+    {
+        if(name==symboltable[symbol_index].symbolname)
+            return symboltable[symbol_index];
+    }
+    return nullsymbol;
 }
-
 void error(string strerror)
 {
-	cout << "Error:"<<strerror << endl;
+    cout << "Error:"<<strerror << endl;
 }
+
+char * string2char(string str)
+{
+    return const_cast<char *>(str.c_str());
+}
+
+//get address label
+string getsign(string choice)
+{
+    if (choice == "now")
+    {
+        stringstream s;
+        string str;
+        s << nodenum;
+        s >> str;
+        string sign = node + str;
+        return sign;
+    }
+    else if (choice == "next")
+    {
+        nodenum++;
+        stringstream s;
+        string str;
+        s << nodenum;
+        s >> str;
+        string sign = node + str;
+        return sign;
+    }
+    else
+        return "";
+}
+
+//key word
+string keyword[]=
+{
+    //define
+    "var",
+    "def",
+    //type
+    "int",
+    "string",
+    //exp
+    "if",
+    "while",
+    //system function
+    "print"
+    
+};
