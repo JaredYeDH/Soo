@@ -39,7 +39,7 @@ public:
     void parse_expreesion();
     void parse_if();
     void parse_while();
-    void parse_judge(exp_type type);
+    void parse_judge(exp_type type,string choice);
     void parse_bool(vector<string> codes,string choice);
     bool parse_judgenumber(string num); //check array size type is int or not
     void parse_typecheck(string type);
