@@ -348,25 +348,49 @@ void parse::parse_defvar()
                 array->codegen();
             }
         }
-        //string variable define
-        if(codestream[index]=="=")
+        //string normal variable
+        else
         {
-            index++;
-            string value="";
-            parse_tokenjudge("\"");
-            index++;
-            while(codestream[index]!="\"")
+            bool continuous=true; //continuous declaration variable
+            while(continuous)
             {
-                value+=codestream[index];
-                index++;
+                //string variable define
+                if(codestream[index]=="=")
+                {
+                    index++;
+                    string value="";
+                    parse_tokenjudge("\"");
+                    index++;
+                    while(codestream[index]!="\"")
+                    {
+                        value+=codestream[index];
+                        index++;
+                    }
+                    index++; // read "
+                    symbol_insert(name, string_varaible);
+                    string_ast * string_value=new string_ast(value);
+                    defstrvariable_ast * str_variable=new defstrvariable_ast(name,string_value);
+                    str_variable->codegen();
+                }
+                //string variable statement
+                else
+                {
+                    symbol_insert(name, string_varaible);
+                    string_ast * string_value=new string_ast(" ");
+                    defstrvariable_ast * str_variable=new defstrvariable_ast(name,string_value);
+                    str_variable->codegen();
+                }
+                if(codestream[index]==",")
+                {
+                    index++;
+                    continuous=true;
+                    name=codestream[index];
+                    index++;
+                }
+                else
+                    continuous=false;
             }
-            index++; // read "
-            symbol_insert(name, string_varaible);
-            string_ast * string_value=new string_ast(value);
-            defstrvariable_ast * str_variable=new defstrvariable_ast(name,string_value);
-            str_variable->codegen();
         }
-            
     }
     //int
     else if (type=="int")
@@ -414,23 +438,35 @@ void parse::parse_defvar()
         //int normal variable
         else
         {
-            //int variable define
-            if (codestream[index] == "=")
-            {
-                index++;
-                number_ast *value = new number_ast(0);
-                defvariable_ast *variable = new defvariable_ast(name, value);
-                variable->codegen();
-                parse_binary(name);
-                symbol_insert(name, int_variable);
-            }
-            //int variable statement
-            else
-            {
-                symbol_insert(name, int_variable);
-                number_ast *value = new number_ast(0);
-                defvariable_ast *variable = new defvariable_ast(name, value);
-                variable->codegen();
+            bool continuous=true; //continuous declaration variable
+            while (continuous) {
+                //int variable define
+                if (codestream[index] == "=")
+                {
+                    index++;
+                    number_ast *value = new number_ast(0);
+                    defvariable_ast *variable = new defvariable_ast(name, value);
+                    variable->codegen();
+                    parse_binary(name);
+                    symbol_insert(name, int_variable);
+                }
+                //int variable statement
+                else
+                {
+                    symbol_insert(name, int_variable);
+                    number_ast *value = new number_ast(0);
+                    defvariable_ast *variable = new defvariable_ast(name, value);
+                    variable->codegen();
+                }
+                if(codestream[index]==",")
+                {
+                    index++;
+                    continuous=true;
+                    name=codestream[index];
+                    index++;
+                }
+                else
+                    continuous=false;
             }
         }
     }
@@ -450,7 +486,7 @@ string parse::parse_binary_exp()
     string op1,op2,operation;
     op1=parse_binary_term();
     operation=codestream[index];
-    if(operation=="\n")
+    if (operation!="+"&&operation!="-"&&operation!="*"&&operation!="/")
         return op1;
     parse_operatorcheck(operation);
     while(operation=="+"||operation=="-")
@@ -472,7 +508,7 @@ string parse::parse_binary_term()
     string op1,op2,operation;
     op1=parse_binary_factor();
     operation=codestream[index];//operator
-    if (operation=="\n")
+    if (operation!="+"&&operation!="-"&&operation!="*"&&operation!="/")
         return op1;
     parse_operatorcheck(operation);
     while (operation=="*"||operation=="/")
@@ -536,7 +572,10 @@ void parse::parse_func()
 void parse::parse_system_func()
 {
     if(codestream[index]=="print")
+    {
+        index++;
         parse_system_print();
+    }
 }
 
 //system function print()
@@ -545,11 +584,11 @@ void parse::parse_system_print()
     parse_tokenjudge("(");
     index++;
     string content;
-    while(codestream[index]!=")")
-    {
+    while (codestream[index]!=")") {
         content+=codestream[index];
         index++;
     }
+    index++;
     print_ast * print=new print_ast(content);
     print->codegen();
 }
@@ -592,25 +631,27 @@ void parse::parse_expreesion()
 }
 
 //judge expression .like while if ...
-void parse::parse_judge(exp_type type)
+void parse::parse_judge(exp_type type,string choice)
 {
     vector<string> codes;
     parse_tokenjudge("(");
     index++;
-    string left_cmp=parse_get_variable_real(codestream[index]);
+    string left_cmp=getsign("next");
+    parse_binary(left_cmp);
     codes.push_back(left_cmp);
     string op=codestream[index];
     index++;
     codes.push_back(op);
-    string right_cmp=parse_get_variable_real(codestream[index]);
+    string right_cmp=getsign("next");
+    parse_binary(right_cmp);
     codes.push_back(right_cmp);
     if (type == if_exp)
     {
-        parse_bool(codes,"next");
+        parse_bool(codes,choice);
     }
     else if (type == while_exp)
     {
-        parse_bool(codes,"next");
+        parse_bool(codes,choice);
     }
     parse_tokenjudge(")");
     index++;
@@ -637,7 +678,7 @@ void parse::parse_bool(vector<string> codes,string choice)
 void parse::parse_if()
 {
     string strsign;
-    parse_judge(if_exp);
+    parse_judge(if_exp,"next");
     while (codestream[index] != "{")
         index++;
     index++;
@@ -658,18 +699,8 @@ void parse::parse_while()
 {
     string strsign;
     vector<string> codes;
-    parse_tokenjudge("(");
-    index++;
-    string left_cmp=parse_get_variable_real(codestream[index]);
-    codes.push_back(left_cmp);
-    string op=codestream[index];
-    index++;
-    codes.push_back(op);
-    string right_cmp=parse_get_variable_real(codestream[index]);
-    codes.push_back(right_cmp);
-    while(codestream[index]!="(")
-        index--;
-    parse_judge(while_exp);
+    int judge_startindex=index;
+    parse_judge(while_exp,"next");
     while (codestream[index] != "{")
         index++;
     index++;
@@ -683,5 +714,8 @@ void parse::parse_while()
     //end label
     end_ast * end = new end_ast("end",strsign);
     end->codegen();
-    parse_bool(codes,strsign);
+    int block_endindex=index;
+    index=judge_startindex;
+    parse_judge(while_exp,strsign);
+    index=block_endindex;
 }
