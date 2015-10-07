@@ -80,7 +80,7 @@ void token::readline()
                 codestream.push_back(token);
             }
             //symbol
-            else if (line[index] == ';'||line[index]==','||line[index]=='"')
+            else if (line[index] == ';'||line[index]==','||line[index]=='"'||line[index]=='\\')
             {
                 string token = "";
                 token += line[index];
@@ -119,7 +119,6 @@ void token::readline()
                     index++;
                 }
             }
-            //space
             else
                 index++;
         }
