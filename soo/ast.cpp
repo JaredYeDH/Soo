@@ -114,5 +114,6 @@ void end_ast::codegen()
 
 void print_ast::codegen()
 {
-    
+    cout<<"OPLOAD DL "<<content<<endl;
+    cout<<"OPPRINTR DL"<<endl;
 }
