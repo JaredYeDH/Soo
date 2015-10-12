@@ -1,23 +1,21 @@
 //
 //  main.cpp
-//  Lmachine
+//  Soo
 //
-//  Created by leviathan on 15/9/21.
+//  Created by leviathan on 15/9/8.
 //  Copyright (c) 2015年 leviathan. All rights reserved.
 //
 
 #include <iostream>
-#include "assembler.h"
-#include "lmachine.h"
+#include "token.h"
+#include "parse.h"
 using namespace std;
 
-int main() {    
-    Lmachine lvm;
-    lvm.init();         //init lmachine
-    lvm.readline();     //get code
-    Assembler assembler;
-    assembler.assemblerrun();
-    lvm.lvmrun(assembler);
-    cout<<"lvm is over ..."<<endl;
+int main() {
+    token tokenmachine;
+  //tokenmachine.tokeninit();
+    tokenmachine.readline();
+    parse parsemachine;
+    parsemachine.build_ast();
     return 0;
 }
