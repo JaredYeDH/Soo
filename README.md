@@ -3,7 +3,7 @@
 
 ##Building and Running:
 
-###Linux,*nix,Mac OSX:
+###Linux,*nix,Mac OS X:
 	$
 	$
 	$
