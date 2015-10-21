@@ -1,14 +1,18 @@
 #Soo
-   > Soo是简易的自制类C编程语言,支持基本的数据类型int,string,支持if,while语句类型,前端经过词法分析,语法分析,语义分析,后端生成自制虚拟机 [Lvm](https://github.com/Leviathan1995/Lvm) 的目标代码.
+   > Soo是简易的自制类C编程语言,支持基本的数据类型int,string,支持if,while语句类型,前端经过词法分析,语法分析,语义分析,后端生成自制虚拟机 [Lvm](https://github.com/Leviathan1995/Lvm) 的目标代码.目前处于最后的完善阶段,基本完成了写她的初衷,进一步学习编译原理并进行大量的代码练习。
+
 
 ##Building and Running:
 
 ###Linux,*nix,Mac OS X:
-	$
-	$
-	$
+	$ git clone https://github.com/Leviathan1995/Soo.git
+	$ cd Lsy_Soo
+	$ make
+	$ ./Lsy
+	$ cd ../Lsy_Lvm
+	$ make
+	$ ./Lvmachine
 	
-
 ##Example:
 
 
