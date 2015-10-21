@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 leviathan. All rights reserved.
 //
 
+#include <iostream>
 #include "global.h"
 #include <string>
 #include <sstream>
