@@ -9,7 +9,7 @@
 
 ##Building and Running:
 
-###Linux,*nix,Mac OS X:
+###*nix:
 	$ git clone https://github.com/Leviathan1995/Soo.git
 	$ cd Lsy_Soo
 	$ make
