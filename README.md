@@ -6,6 +6,8 @@
 * Lsy_Lvm: lvm虚拟机源码
 * Lsy_Soo: soo编译器源码
 * test:    测试代码
+* pzi:截屏图片
+
 
 ##Building and Running:
 
@@ -19,7 +21,9 @@
 	$ ./Lvmachine
 	
 ##Example:
+* 利用Soo画一个"心"
 
+![image](https://github.com/Leviathan1995/Soo/blob/master/pzi/heart.jpg)
 
 ##Syntax：
 
