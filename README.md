@@ -1,5 +1,5 @@
 #Soo
-   > Soo是简易的自制类C编程语言,支持基本的数据类型int,string,支持if,while语句类型,前端经过词法分析,语法分析,语义分析,后端生成自制虚拟机 [Lvm](https://github.com/Leviathan1995/Lvm) 的目标代码.
+   Soo是简易的自制类C编程语言,支持基本的数据类型int,string,支持if,while语句类型,前端经过词法分析,语法分析,语义分析,后端生成自制虚拟机 [Lvm](https://github.com/Leviathan1995/Lvm) 的目标代码.
 
 
 ##Building and Running:
