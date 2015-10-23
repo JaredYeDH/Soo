@@ -69,6 +69,6 @@
 		print(variable)
 
 
-###Lincense:
+###License:
 	
 		MIT
