@@ -149,11 +149,20 @@ void end_ast::codegen()
 
 void print_ast::codegen()
 {
-    ofstream fout;
-    fout.open(string2char(token::outfile),ios::app);
-    fout<<"OPLOADVB DL "<<content<<endl;
-    fout<<"OPPRINTR DL"<<endl;
-    fout.close();
+    if (symbol_gettype(content)==int_array) {
+        ofstream fout;
+        fout.open(string2char(token::outfile),ios::app);
+        fout<<"OPPRINTRLIST "<<content<<endl;
+        fout.close();
+    }
+    else
+    {
+        ofstream fout;
+        fout.open(string2char(token::outfile),ios::app);
+        fout<<"OPLOADVB DL "<<content<<endl;
+        fout<<"OPPRINTR DL"<<endl;
+        fout.close();
+    }
 }
 
 void program_end::codegen()
