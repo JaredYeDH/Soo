@@ -153,12 +153,8 @@ string parse::parse_getarrayinfo(string variable_name)
     index++;
     parse_tokenjudge("[");
     index++;
-    string array_index;
-    while(codestream[index]!="]")
-    {
-        array_index+=codestream[index];
-        index++;
-    }
+    string array_index=getsign("next");
+    parse_binary(array_index);
     int array_size=string2int(array_index);
     symbol inistsymbol=symbol_getsymbol(variable_name);
     if(array_size>inistsymbol.array_size)
@@ -189,70 +185,69 @@ string parse::parse_get_variable_real(string variable_name)
 }
 
 /* arithmetic operation immediate number
-int parse::binary_immediate()
-{
-    stack<int> num;
-    stack<string> op;
-    int exp_index=index;
-    while (codestream[exp_index] != "\n")
-    {
-        string token = codestream[index];
-        if (judge_op(token))
-        {
-            if (op.size() == 0)
-                op.push(token);
-            else if (lowlevel(token, op.top()))
-            {
-                int number2 = num.top();
-                num.pop();
-                int number1 = num.top();
-                num.pop();
-                string operand = op.top();
-                int out = operation(number1, number2, operand);
-                num.push(out);
-            }
-            else
-            {
-                op.push(token);
-            }
-        }
-        else if (judge_variable(token))
-        {
-            int variable_value = symbol_getvalue(token);
-            num.push(variable_value);
-        }
-        else //number
-        {
-            int number = string2int(token);
-            num.push(number);
-        }
-        exp_index++;
-    }
-    while (op.size() != 0)
-    {
-        int number2 = num.top();
-        num.pop();
-        int number1 = num.top();
-        num.pop();
-        string operand = op.top();
-        op.pop();
-        int out = operation(number1, number2, operand);
-        num.push(out);
-    }
-    return num.top();
-}
+ int parse::binary_immediate()
+ {
+ stack<int> num;
+ stack<string> op;
+ int exp_index=index;
+ while (codestream[exp_index] != "\n")
+ {
+ string token = codestream[index];
+ if (judge_op(token))
+ {
+ if (op.size() == 0)
+ op.push(token);
+ else if (lowlevel(token, op.top()))
+ {
+ int number2 = num.top();
+ num.pop();
+ int number1 = num.top();
+ num.pop();
+ string operand = op.top();
+ int out = operation(number1, number2, operand);
+ num.push(out);
+ }
+ else
+ {
+ op.push(token);
+ }
+ }
+ else if (judge_variable(token))
+ {
+ int variable_value = symbol_getvalue(token);
+ num.push(variable_value);
+ }
+ else //number
+ {
+ int number = string2int(token);
+ num.push(number);
+ }
+ exp_index++;
+ }
+ while (op.size() != 0)
+ {
+ int number2 = num.top();
+ num.pop();
+ int number1 = num.top();
+ num.pop();
+ string operand = op.top();
+ op.pop();
+ int out = operation(number1, number2, operand);
+ num.push(out);
+ }
+ return num.top();
+ }
  
-int parse::getvalue(string name)
-{
-    int value;
-    if (judge_variable(name))
-        value = symbol_getvalue(name);
-    else
-        value = string2int(name);
-    return value;
-}
-
-*/
+ int parse::getvalue(string name)
+ {
+ int value;
+ if (judge_variable(name))
+ value = symbol_getvalue(name);
+ else
+ value = string2int(name);
+ return value;
+ }
+ */
 
 //build syntax tree
 void parse::build_ast()
@@ -423,8 +418,9 @@ void parse::parse_defvar()
                     }
                     else
                         num.push_back(string2int(codestream[index]));
-                        index++;
+                    index++;
                 }
+                index++;// " { "
                 symbol_insert(name, int_array);
                 intarray_ast * array = new intarray_ast(name,num,size);
                 array->codegen();
