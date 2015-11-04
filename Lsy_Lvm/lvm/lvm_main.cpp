@@ -11,7 +11,7 @@
 #include "lvm_lmachine.h"
 using namespace std;
 
-int main() {    
+int main() {
     Lmachine lvm;
     lvm.init();         //init lmachine
     lvm.readline();     //get code
