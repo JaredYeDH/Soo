@@ -401,7 +401,7 @@ void Lmachine::readline()
 {
     int index,length;
     ifstream code;
-    code.open("/Users/Leviathan/Documents/Soo/heartlvm.txt");
+    code.open(infile);
     string line;
     while(getline(code,line))
     {
