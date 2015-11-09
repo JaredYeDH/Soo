@@ -1,15 +1,13 @@
-Lsy:soo_main.o soo_ast.o soo_global.o soo_parse.o soo_token.o
-	g++ -g soo_main.o soo_ast.o soo_global.o soo_parse.o soo_token.o -o Lsy
-soo_main.o:soo/soo_main.cpp soo/soo_token.h soo/soo_parse.h
-	g++ -std=c++11 -g -c soo/soo_main.cpp
-soo_ast.o:soo/soo_ast.cpp soo/soo_ast.h soo/soo_token.h
-	g++ -std=c++11 -g -c soo/soo_ast.cpp
-soo_global.o:soo/soo_global.cpp soo/soo_global.h
-	g++ -std=c++11 -g -c soo/soo_global.cpp
-soo_parse.o:soo/soo_parse.cpp soo/soo_parse.h soo/soo_ast.h soo/soo_global.h
-	g++ -std=c++11 -g -c soo/soo_parse.cpp
-soo_token.o:soo/soo_token.cpp soo/soo_token.h soo/soo_global.h
-	g++ -std=c++11 -g -c soo/soo_token.cpp
+-Lvmachine:lvm_main.o lvm_lmachine.o lvm_assembler.o lvm_global.o
+-		g++ -g  lvm_main.o lvm_lmachine.o lvm_assembler.o lvm_global.o   -o Lvmachine
+-lvm_main.o:lvm/lvm_main.cpp lvm/lvm_lmachine.h lvm/lvm_assembler.h
+-		g++ -std=c++11  -g -c lvm/lvm_main.cpp
+-lvm_lmachine.o:lvm/lvm_lmachine.cpp lvm/lvm_lmachine.h
+-		g++ -std=c++11 -g -c lvm/lvm_lmachine.cpp
+-lvm_assembler.o:lvm/lvm_assembler.cpp lvm/lvm_assembler.h
+-		g++ -std=c++11 -g -c lvm/lvm_assembler.cpp
+-lvm_global.o:lvm/lvm_global.cpp lvm/lvm_global.h
+-		g++ -std=c++11 -g -c lvm/lvm_global.cpp
 
 clean:
-	rm -f soo_main.o soo_ast.o soo_global.o soo_parse.o soo_token.o Lsy
+	rm -f lvm_main.o lvm_lmachine.o lvm_assembler.o lvm_global.o Lvmachine
