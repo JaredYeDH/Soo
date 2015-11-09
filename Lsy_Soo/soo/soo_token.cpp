@@ -49,7 +49,7 @@ void token::readline()
 {
     int index, length;
     ifstream code;
-    code.open("/Users/Leviathan/Documents/Soo/sort.txt");
+    code.open(infile);
     string line;
     while (getline(code, line)) {
         length = int(line.length());
