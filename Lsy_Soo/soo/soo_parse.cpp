@@ -38,7 +38,7 @@ void parse::parse_idcheck(string id)
 {
     for(int keyindex=0;keyindex<keynum;keyindex++)
     {
-        if(keyword[index]==id)
+        if(keyword[keyindex]==id)
         {
             error(id+" is a key word");
             break;

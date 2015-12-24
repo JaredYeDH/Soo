@@ -49,7 +49,7 @@ var_type symbol_gettype(string name)
 symbol symbol_getsymbol(string name)
 {
     symbol nullsymbol;
-    for(int symbol_index;symbol_index<symboltable.size();symbol_index++)
+    for(int symbol_index=0;symbol_index<symboltable.size();symbol_index++)
     {
         if(name==symboltable[symbol_index].symbolname)
             return symboltable[symbol_index];

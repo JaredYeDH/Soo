@@ -14,7 +14,7 @@
 #include <vector>
 using namespace std;
 
-#define keynum 7
+#define keynum 6
 extern string keyword[];
 extern string node;
 extern int nodenum;
@@ -40,7 +40,7 @@ class symbol
 {
 public:
     string symbolname;
-    int array_size; //if variable is array , array_size is array length
+    int array_size=0; //if variable is array , array_size is array length
     var_type type;
 };
 
