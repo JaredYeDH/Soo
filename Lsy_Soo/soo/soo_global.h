@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 leviathan. All rights reserved.
 //
 
-#ifndef _SOO_GLOBAL_
-#define _SOO_GLOBAL_
+#ifndef _SOO_GLOBAL_H
+#define _SOO_GLOBAL_H
 
 #include <iostream>
 #include <string>
