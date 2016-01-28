@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 leviathan. All rights reserved.
 //
 
-#ifndef __Soo__token__
-#define __Soo__token__
+#ifndef _SOO_TOKEN_H
+#define _SOO_TOKEN_H
 
 #include <iostream>
 #include <string>
