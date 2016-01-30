@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 leviathan. All rights reserved.
 //
 
-#ifndef _SOO_TOKEN_H
-#define _SOO_TOKEN_H
+#ifndef SOO_TOKEN_H_
+#define SOO_TOKEN_H_
 
 #include <iostream>
 #include <string>
@@ -23,4 +23,4 @@ public:
     bool tokeninit();
     void readline();
 };
-#endif /* defined(__Soo__token__) */
+#endif /* defined(SOO_TOKEN_H_) */
