@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 leviathan. All rights reserved.
 //
 
-#ifndef __Soo__parse__
-#define __Soo__parse__
+#ifndef SOO_PARSE_H_
+#define SOO_PARSE_H_
 
 #include <iostream>
 #include "soo_global.h"
@@ -51,4 +51,4 @@ public:
     string parse_get_variable_real(string variable_name);
 };
 
-#endif /* defined(__Soo__parse__) */
+#endif /* defined(SOO_PARSE_H_) */
