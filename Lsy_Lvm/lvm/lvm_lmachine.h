@@ -47,4 +47,4 @@ public:
     static string outfile;
     
 };
-#endif /* defined(__Lvm__lmachine__) */
+#endif /* defined(LVM_LMACHINE_H_) */
