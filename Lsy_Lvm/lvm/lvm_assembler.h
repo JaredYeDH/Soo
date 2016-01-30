@@ -7,8 +7,8 @@
 //
 
 #pragma once
-#ifndef __Lmachine__assembler__
-#define __Lmachine__assembler__
+#ifndef LMACHINE_ASSEMBLER_H_
+#define LMACHINE_ASSEMBLER_H_
 
 #include <iostream>
 #include "lvm_global.h"
@@ -30,4 +30,4 @@ public:
     int searchreg(string token);
     int getopcode(string token);
 };
-#endif /* defined(__Lmachine__assembler__) */
+#endif /* defined(LMACHINE_ASSEMBLER_H_) */
