@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 leviathan. All rights reserved.
 //
 
-#ifndef __Soo__ast__
-#define __Soo__ast__
+#ifndef SOO_AST_H_
+#define SOO_AST_H_
 
 #include <iostream>
 #include <vector>
@@ -228,4 +228,4 @@ class program_end
 public:
     void codegen();
 };
-#endif /* defined(__Soo__ast__) */
+#endif /* defined(SOO_AST_H_) */
