@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 leviathan. All rights reserved.
 //
 
-#ifndef _SOO_GLOBAL_H
-#define _SOO_GLOBAL_H
+#ifndef SOO_GLOBAL_H_
+#define SOO_GLOBAL_H_
 
 #include <iostream>
 #include <string>
@@ -56,4 +56,4 @@ void error(string error);
 string getsign(string choice);
 char * string2char(string str);
 
-#endif /* defined(__Soo__global__) */
+#endif /* defined(SOO_GLOBAL_H_) */
