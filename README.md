@@ -13,17 +13,19 @@ Soo是简易的自制类C编程语言,支持基本的数据类型int,string,支�
 
 ###*nix:
 	$ git clone https://github.com/Leviathan1995/Soo.git
-	$ cd Lsy_Soo
+	$ cd Soo/Lsy_Soo
 	$ make
-	$ ./Lsy
-	$ 
+	$ ./Soo
+	$ 输入源代码绝对路径.例如:/Users/leviathan/Code/Soo/test/heart.txt
+	$ 输入中间代码绝对路径.例如:/Users/leviathan/Code/Soo/test/heartlvm.txt
 	$ cd ../Lsy_Lvm
 	$ make
-	$ ./Lvmachine
-	$ 
+	$ ./Lvm
+	$ 输入中间代码绝对路径.例如:/Users/leviathan/Code/Soo/test/heartlvm.txt
 	
 ##Example:
 * 利用Soo画一个"心"
+* [源代码](https://github.com/Leviathan1995/Soo/blob/master/test/heart.txt)
 
 ![image](https://github.com/Leviathan1995/Soo/blob/master/pzi/heart.png)
 
