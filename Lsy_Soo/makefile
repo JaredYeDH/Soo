@@ -1,15 +1,15 @@
-Lsy:soo_main.o soo_ast.o soo_global.o soo_parse.o soo_token.o
-	g++ -g soo_main.o soo_ast.o soo_global.o soo_parse.o soo_token.o -o Lsy
-soo_main.o:soo/soo_main.cpp soo/soo_token.h soo/soo_parse.h
-	g++ -std=c++11 -g -c soo/soo_main.cpp
-soo_ast.o:soo/soo_ast.cpp soo/soo_ast.h soo/soo_token.h
-	g++ -std=c++11 -g -c soo/soo_ast.cpp
-soo_global.o:soo/soo_global.cpp soo/soo_global.h
-	g++ -std=c++11 -g -c soo/soo_global.cpp
-soo_parse.o:soo/soo_parse.cpp soo/soo_parse.h soo/soo_ast.h soo/soo_global.h
-	g++ -std=c++11 -g -c soo/soo_parse.cpp
-soo_token.o:soo/soo_token.cpp soo/soo_token.h soo/soo_global.h
-	g++ -std=c++11 -g -c soo/soo_token.cpp
+Soo:soo_main.o soo_ast.o soo_global.o soo_parse.o soo_token.o
+	g++ -g soo_main.o soo_ast.o soo_global.o soo_parse.o soo_token.o -o Soo
+soo_main.o:src/soo_main.cpp src/soo_token.h src/soo_parse.h
+	g++ -std=c++11 -g -c src/soo_main.cpp
+soo_ast.o:src/soo_ast.cpp src/soo_ast.h src/soo_token.h
+	g++ -std=c++11 -g -c src/soo_ast.cpp
+soo_global.o:src/soo_global.cpp src/soo_global.h
+	g++ -std=c++11 -g -c src/soo_global.cpp
+soo_parse.o:src/soo_parse.cpp src/soo_parse.h src/soo_ast.h src/soo_global.h
+	g++ -std=c++11 -g -c src/soo_parse.cpp
+soo_token.o:src/soo_token.cpp src/soo_token.h src/soo_global.h
+	g++ -std=c++11 -g -c src/soo_token.cpp
 
 clean:
-	rm -f *.o Lsy
+	rm -f *.o Soo
