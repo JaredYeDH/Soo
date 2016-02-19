@@ -25,7 +25,7 @@ Soo是简易的自制类C编程语言,支持基本的数据类型int,string,支�
 ##Example:
 * 利用Soo画一个"心"
 
-![image](https://github.com/Leviathan1995/Soo/blob/master/pzi/heart.jpg)
+![image](https://github.com/Leviathan1995/Soo/blob/master/pzi/heart.png)
 
 ##Syntax：
 
