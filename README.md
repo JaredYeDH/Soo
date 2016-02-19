@@ -21,6 +21,7 @@ Soo是简易的自制类C编程语言,支持基本的数据类型int,string,支�
 	$ make
 	$ ./Lvm
 	$ 输入中间代码绝对路径.例如:/Users/leviathan/Code/Soo/test/heartlvm.txt
+	$ 输入结果文件绝对路径.如果没有结果文件可输入参数:null
 	
 ##Example:
 * 利用Soo画一个"心"
