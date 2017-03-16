@@ -1,16 +1,16 @@
-#Soo
+# Soo
 Soo是简易的自制类C编程语言,支持基本的数据类型int,string,支持if,while语句类型,前端经过词法分析,语法分析,语义分析,后端生成自制虚拟机 [Lvm](https://github.com/Leviathan1995/Lvm) 的目标代码.
 
-##File:
+## File:
 * Lsy_Lvm: lvm虚拟机源码
 * Lsy_Soo: soo编译器源码
 * test:    测试代码
 * pzi:截屏图片
 
 
-##Building and Running:
+## Building and Running:
 
-###*nix:
+### *nix:
 	$ git clone https://github.com/Leviathan1995/Soo.git
 	$ cd Soo/Lsy_Soo
 	$ make
@@ -23,13 +23,13 @@ Soo是简易的自制类C编程语言,支持基本的数据类型int,string,支�
 	$ 输入中间代码绝对路径.例如:/Users/leviathan/Code/Soo/test/heartlvm.txt
 	$ 输入结果文件绝对路径.如果没有结果文件可输入参数:null
 	
-##Example:
+## Example:
 * 利用Soo画一个"心"
 * [源代码](https://github.com/Leviathan1995/Soo/blob/master/test/heart.txt)
 
 ![image](https://github.com/Leviathan1995/Soo/blob/master/pzi/heart.png)
 
-##Syntax：
+## Syntax：
 
 * 支持的int,string数据类型
 * 支持int型数组
@@ -74,6 +74,6 @@ Soo是简易的自制类C编程语言,支持基本的数据类型int,string,支�
 		print(variable)
 
 
-###License:
+### License:
 	
 		MIT
